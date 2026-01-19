@@ -22,6 +22,7 @@ services:
       - PGID=1000
       - TZ=Europe/Brussels
       - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
     volumes:
       - /mnt/external/appdata/qbittorrent:/config
       - /mnt/external/media/downloads:/downloads
@@ -46,6 +47,7 @@ services:
       - ../.env
     ports:
       - 8080:8080 # qBittorrent Web UI
+      - 8001:8000 # Gluetun Control Server (Mapped to 8001 to avoid Seafile conflict)
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped

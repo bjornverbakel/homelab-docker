@@ -1,7 +1,25 @@
-- greeting:
-    text_size: xl
-    text: Welcome Home, Bjorn
 - resources:
     cpu: true
+    cputemp: true
+    tempmax: 80
     memory: true
     disk: /app/config
+
+- search:
+    provider: google
+    focus: false
+    showSearchSuggestions: true
+    target: _blank
+
+- datetime:
+    text_size: xl
+    format:
+      timeStyle: short
+      hourCycle: h23
+
+- openmeteo:
+    label: Helmond
+    latitude: 51.46344354652861
+    longitude: 5.64366069048921
+    units: metric
+    cache: 5 # minutes
