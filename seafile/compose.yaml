@@ -1,0 +1,39 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: seafile-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${SEAFILE_DB_PASSWORD}
+      - MYSQL_LOG_CONSOLE=true
+    env_file:
+      - ../.env
+    volumes:
+      - /mnt/external/appdata/seafile/db:/var/lib/mysql
+    restart: unless-stopped
+
+  memcached:
+    image: memcached:1.6
+    container_name: seafile-memcached
+    entrypoint: memcached -m 256
+    restart: unless-stopped
+
+  seafile:
+    image: seafileltd/seafile-mc:latest
+    container_name: seafile
+    ports:
+      - "8000:80"
+    volumes:
+      - /mnt/external/appdata/seafile/data:/shared
+    environment:
+      - DB_HOST=db
+      - DB_ROOT_PASSWD=${SEAFILE_DB_PASSWORD}
+      - TIME_ZONE=Europe/Brussels
+      - SEAFILE_ADMIN_EMAIL=${SEAFILE_ADMIN_EMAIL}
+      - SEAFILE_ADMIN_PASSWORD=${SEAFILE_ADMIN_PASSWORD}
+      - SEAFILE_SERVER_LETSENCRYPT=false
+    env_file:
+      - ../.env
+    depends_on:
+      - db
+      - memcached
+    restart: unless-stopped

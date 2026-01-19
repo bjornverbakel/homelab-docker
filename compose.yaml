@@ -1,0 +1,7 @@
+include:
+  - smarthome/compose.yaml
+  - network/compose.yaml
+  - seafile/compose.yaml
+  - management/compose.yaml
+  - dev/compose.yaml
+  - media/compose.yaml

@@ -1,0 +1,16 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    environment:
+      TZ: 'Europe/Brussels'
+      WEBPASSWORD: ${PIHOLE_PASSWORD}
+    env_file:
+      - ../.env
+    volumes:
+      - '/mnt/external/appdata/pihole:/etc/pihole'
+      - '/mnt/external/appdata/dnsmasq.d:/etc/dnsmasq.d'
+    restart: unless-stopped
