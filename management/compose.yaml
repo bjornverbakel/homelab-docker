@@ -18,7 +18,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /mnt/external/appdata/homepage:/app/config
+      - ./homepage:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=192.168.2.11:3000,100.111.212.87:3000

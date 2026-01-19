@@ -1,0 +1,83 @@
+- Network:
+    - Pi-hole:
+        icon: pi-hole.png
+        href: http://192.168.2.11:80/admin
+        description: Ad blocking
+        server: my-docker
+        container: pihole
+        widget:
+          type: pihole
+          url: http://192.168.2.11:80
+          key: ${PIHOLE_PASSWORD}
+
+- Home Automation:
+    - Home Assistant:
+        icon: home-assistant.png
+        href: http://192.168.2.11:8123
+        description: Smart Home
+        server: my-docker
+        container: homeassistant
+
+- Storage:
+    - Seafile:
+        icon: seafile.png
+        href: http://192.168.2.11:8000
+        description: File Sync
+        server: my-docker
+        container: seafile
+
+- Management:
+    - Portainer:
+        icon: portainer.png
+        href: https://192.168.2.11:9443
+        description: Docker Management
+        server: my-docker
+        container: portainer
+
+    - Code Server:
+        icon: visual-studio-code.png
+        href: http://192.168.2.11:8443
+        description: VS Code in Browser
+        server: my-docker
+        container: code_server
+
+- Entertainment:
+    - Jellyfin:
+        icon: jellyfin.png
+        href: http://192.168.2.11:8096
+        description: Media Server
+        server: my-docker
+        container: jellyfin
+    - qBittorrent:
+        icon: qbittorrent.png
+        href: http://192.168.2.11:8080
+        description: Torrent Downloader
+        server: my-docker
+        container: qbittorrent
+        widget:
+          type: qbittorrent
+          url: http://192.168.2.11:8080
+          username: admin
+          password: adminadmin
+
+- Automation:
+    - Radarr:
+        icon: radarr.png
+        href: http://192.168.2.11:7878
+        description: Movie Automation
+        server: my-docker
+        container: radarr
+        widget:
+          type: radarr
+          url: http://192.168.2.11:7878
+          key: cead5a83b7154be0bb1d8e073ce0c024
+    - Prowlarr:
+        icon: prowlarr.png
+        href: http://192.168.2.11:9696
+        description: Indexer Manager
+        server: my-docker
+        container: prowlarr
+        widget:
+          type: prowlarr
+          url: http://192.168.2.11:9696
+          key: 509dcaa046ff43568c9a2cd0fda98937

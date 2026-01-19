@@ -1,0 +1,7 @@
+- greeting:
+    text_size: xl
+    text: Welcome Home, Bjorn
+- resources:
+    cpu: true
+    memory: true
+    disk: /app/config
