@@ -6,7 +6,7 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      TZ: 'Europe/Brussels'
+      TZ: ${TZ}
       WEBPASSWORD: ${PIHOLE_PASSWORD}
     env_file:
       - ../.env

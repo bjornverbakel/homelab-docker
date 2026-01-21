@@ -1,9 +1,9 @@
 services:
   homeassistant:
-    container_name: homeassistant
+    container_name: home-assistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
     volumes:
-      - /mnt/external/appdata/homeassistant:/config
+      - /mnt/external/appdata/home-assistant:/config
       - /mnt/external:/mnt/external:ro
       - /:/host_fs:ro
       - /etc/localtime:/etc/localtime:ro

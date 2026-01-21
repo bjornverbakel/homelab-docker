@@ -1,7 +1,9 @@
 include:
-  - smarthome/compose.yaml
-  - network/compose.yaml
+  - home-assistant/compose.yaml
+  - pihole/compose.yaml
   - seafile/compose.yaml
-  - management/compose.yaml
-  - dev/compose.yaml
-  - media/compose.yaml
+  - homepage/compose.yaml
+  - portainer/compose.yaml
+  - downloads/compose.yaml
+  - servarr/compose.yaml
+  - jellyfin/compose.yaml
