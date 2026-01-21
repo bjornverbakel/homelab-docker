@@ -2,3 +2,4 @@
 *.backup.yaml
 *.log
 **/logs/
+**/store/
