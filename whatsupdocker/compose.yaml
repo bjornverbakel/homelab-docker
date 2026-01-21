@@ -1,0 +1,42 @@
+services:
+  whatsupdocker:
+    image: getwud/wud:latest
+    container_name: wud
+    environment:
+      - WUD_LOG_LEVEL=info
+      - WUD_WATCHER_DOCKER_HOST=socket-proxy
+      - WUD_WATCHER_DOCKER_PORT=2375
+      - TZ=${TZ}
+
+      # Authentication
+      - WUD_AUTH_BASIC_ADMIN_USER=${WUD_AUTH_USERNAME}
+      - WUD_AUTH_BASIC_ADMIN_HASH=${WUD_AUTH_HASH}
+
+      # Registries
+      - WUD_REGISTRY_LSCR_LSIO_USERNAME=${WUD_GITHUB_USER}
+      - WUD_REGISTRY_LSCR_LSIO_TOKEN=${WUD_GITHUB_TOKEN}
+      - WUD_REGISTRY_GHCR_LSIO_USERNAME=${WUD_GITHUB_USER}
+      - WUD_REGISTRY_GHCR_LSIO_TOKEN=${WUD_GITHUB_TOKEN}
+
+      # Notifications - Standard (Update Available)
+      - WUD_TRIGGER_DISCORD_NOTIFY_URL=${WUD_DISCORD_WEBHOOK}
+      - 'WUD_TRIGGER_DISCORD_NOTIFY_SIMPLETITLE=Update Available: $${container.name}'
+      - 'WUD_TRIGGER_DISCORD_NOTIFY_SIMPLEBODY=New $${container.updateKind.kind} **$${container.updateKind.remoteValue}** available (Current: $${container.updateKind.localValue})'
+
+      # Notifications - Updated (Auto-update triggered)
+      - WUD_TRIGGER_DISCORD_UPDATED_URL=${WUD_DISCORD_WEBHOOK}
+      - WUD_TRIGGER_DISCORD_UPDATED_THRESHOLD=minor
+      - 'WUD_TRIGGER_DISCORD_UPDATED_SIMPLETITLE=🚀 Auto-Update Initiated: $${container.name}'
+      - 'WUD_TRIGGER_DISCORD_UPDATED_SIMPLEBODY=Updating to **$${container.updateKind.remoteValue}** from $${container.updateKind.localValue}'
+
+      # Auto-Update Trigger
+      - WUD_TRIGGER_DOCKER_AUTOUPDATE_PRUNE=true
+      - WUD_TRIGGER_DOCKER_AUTOUPDATE_THRESHOLD=minor
+
+    ports:
+      - 3001:3000
+    volumes:
+      - ./store:/store
+    depends_on:
+      - socket-proxy
+    restart: unless-stopped

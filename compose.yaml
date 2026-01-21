@@ -4,6 +4,8 @@ include:
   - seafile/compose.yaml
   - homepage/compose.yaml
   - portainer/compose.yaml
-  - downloads/compose.yaml
+  - socket-proxy/compose.yaml
+  - qbittorrent/compose.yaml
   - servarr/compose.yaml
   - jellyfin/compose.yaml
+  - whatsupdocker/compose.yaml

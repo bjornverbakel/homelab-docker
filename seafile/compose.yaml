@@ -1,25 +1,9 @@
 services:
-  db:
-    image: mariadb:10.11
-    container_name: seafile-mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${SEAFILE_DB_PASSWORD}
-      - MYSQL_LOG_CONSOLE=true
-    env_file:
-      - ../.env
-    volumes:
-      - /mnt/external/appdata/seafile/db:/var/lib/mysql
-    restart: unless-stopped
-
-  memcached:
-    image: memcached:1.6
-    container_name: seafile-memcached
-    entrypoint: memcached -m 256
-    restart: unless-stopped
-
   seafile:
     image: seafileltd/seafile-mc:latest
     container_name: seafile
+    labels:
+      - "wud.trigger.exclude=docker.autoupdate,discord.updated"
     ports:
       - "8000:80"
     volumes:
@@ -37,3 +21,27 @@ services:
       - db
       - memcached
     restart: unless-stopped
+
+  db:
+    image: mariadb:10.11
+    container_name: seafile-mysql
+    labels:
+      - "wud.trigger.exclude=docker.autoupdate,discord.updated"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${SEAFILE_DB_PASSWORD}
+      - MYSQL_LOG_CONSOLE=true
+    env_file:
+      - ../.env
+    volumes:
+      - /mnt/external/appdata/seafile/db:/var/lib/mysql
+    restart: unless-stopped
+
+  memcached:
+    image: memcached:1.6
+    container_name: seafile-memcached
+    labels:
+      - "wud.trigger.exclude=docker.autoupdate,discord.updated"
+    entrypoint: memcached -m 256
+    restart: unless-stopped
+
+
