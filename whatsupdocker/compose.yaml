@@ -19,15 +19,17 @@ services:
       - WUD_REGISTRY_GHCR_LSIO_TOKEN=${WUD_GITHUB_TOKEN}
 
       # Notifications - Standard (Update Available)
-      - WUD_TRIGGER_DISCORD_NOTIFY_URL=${WUD_DISCORD_WEBHOOK}
-      - 'WUD_TRIGGER_DISCORD_NOTIFY_SIMPLETITLE=Update Available: $${container.name}'
-      - 'WUD_TRIGGER_DISCORD_NOTIFY_SIMPLEBODY=New $${container.updateKind.kind} **$${container.updateKind.remoteValue}** available (Current: $${container.updateKind.localValue})'
+      - WUD_TRIGGER_DISCORD_AVAILABLE_URL=${WUD_DISCORD_WEBHOOK}
+      - 'WUD_TRIGGER_DISCORD_AVAILABLE_SIMPLETITLE=🔔 Update Available: $${container.name}'
+      - 'WUD_TRIGGER_DISCORD_AVAILABLE_SIMPLEBODY=New $${container.updateKind.kind} **$${container.updateKind.remoteValue}** available (Current: $${container.updateKind.localValue})'
+      - WUD_TRIGGER_DISCORD_AVAILABLE_CARDCOLOR=32511
 
       # Notifications - Updated (Auto-update triggered)
       - WUD_TRIGGER_DISCORD_UPDATED_URL=${WUD_DISCORD_WEBHOOK}
       - WUD_TRIGGER_DISCORD_UPDATED_THRESHOLD=minor
       - 'WUD_TRIGGER_DISCORD_UPDATED_SIMPLETITLE=🚀 Auto-Update Initiated: $${container.name}'
       - 'WUD_TRIGGER_DISCORD_UPDATED_SIMPLEBODY=Updating to **$${container.updateKind.remoteValue}** from $${container.updateKind.localValue}'
+      - WUD_TRIGGER_DISCORD_UPDATED_CARDCOLOR=2205499
 
       # Auto-Update Trigger
       - WUD_TRIGGER_DOCKER_AUTOUPDATE_PRUNE=true
