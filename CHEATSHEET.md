@@ -54,7 +54,7 @@ git clone --recursive https://github.com/bjornverbakel/homelab-docker.git
    ```
 3. **Important:** If you updated the Homepage submodule, update the reference here too:
    ```bash
-   git add management/homepage
+   git add homepage/homepage-config
    ```
 4. Push to `homelab-docker` repo:
    ```bash
