@@ -26,7 +26,8 @@ services:
     image: mariadb:10.11
     container_name: seafile-mysql
     labels:
-      - "wud.trigger.exclude=docker.autoupdate,discord.updated"
+      - wud.watch=false
+
     environment:
       - MYSQL_ROOT_PASSWORD=${SEAFILE_DB_PASSWORD}
       - MYSQL_LOG_CONSOLE=true
@@ -40,8 +41,6 @@ services:
     image: memcached:1.6
     container_name: seafile-memcached
     labels:
-      - "wud.trigger.exclude=docker.autoupdate,discord.updated"
+      - wud.watch=false
     entrypoint: memcached -m 256
     restart: unless-stopped
-
-

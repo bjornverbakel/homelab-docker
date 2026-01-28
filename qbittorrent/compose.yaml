@@ -7,11 +7,11 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
-      - VPN_SERVICE_PROVIDER=mullvad
+      - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
-      - WIREGUARD_PRIVATE_KEY=${MULLVAD_PRIVATE_KEY}
-      - WIREGUARD_ADDRESSES=${MULLVAD_ADDRESS}
-      - SERVER_CITIES=Amsterdam
+      - WIREGUARD_PRIVATE_KEY=${PROTONVPN_PRIVATE_KEY}
+      - VPN_PORT_FORWARDING=on
+      - SERVER_COUNTRIES=${PROTONVPN_SERVER_COUNTRIES}
     env_file:
       - ../.env
     ports:
@@ -32,8 +32,26 @@ services:
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
     volumes:
-      - /mnt/external/appdata/qbittorrent:/config
-      - /mnt/external/media/downloads:/downloads
+      - /home/bjorn/external_drive/appdata/qbittorrent:/config
+      - /home/bjorn/external_drive/media:/data/media
     depends_on:
       - gluetun
     restart: unless-stopped
+
+  qbittorrent-port-updater:
+    image: alpine:latest
+    container_name: qbittorrent-port-updater
+    network_mode: service:gluetun
+    environment:
+      - QBIT_USER=${QBITTORRENT_USERNAME}
+      - QBIT_PASS=${QBITTORRENT_PASSWORD}
+    volumes:
+      - ./port-updater.sh:/usr/local/bin/port-updater.sh
+    command: sh -c "apk add --no-cache curl && /usr/local/bin/port-updater.sh"
+    depends_on:
+      - gluetun
+      - qbittorrent
+    restart: unless-stopped
+
+# To check what port has been forwarded: --------------------------------------
+# docker logs gluetun 2>&1 | grep "port forwarded"

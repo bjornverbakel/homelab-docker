@@ -2,12 +2,14 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
+    env_file:
+      - ../.env
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /mnt/external/appdata/prowlarr:/config
+      - /home/bjorn/external_drive/appdata/prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -15,23 +17,31 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
+    env_file:
+      - ../.env
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /mnt/external/appdata/radarr:/config
-      - /mnt/external/media:/data/media
+      - /home/bjorn/external_drive/appdata/radarr:/config
+      - /home/bjorn/external_drive/media:/data/media
     ports:
       - 7878:7878
     restart: unless-stopped
 
-  flaresolverr: # Helps bypass Cloudflare protections for some media downloaders
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    env_file:
+      - ../.env
     environment:
-      - LOG_LEVEL=info
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TZ}
+    volumes:
+      - /home/bjorn/external_drive/appdata/sonarr:/config
+      - /home/bjorn/external_drive/media:/data/media
     ports:
-      - 8191:8191
+      - 8989:8989
     restart: unless-stopped

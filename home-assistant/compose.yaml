@@ -11,3 +11,18 @@ services:
     restart: unless-stopped
     network_mode: host
     privileged: true
+
+  esphome:
+    container_name: esphome
+    image: ghcr.io/esphome/esphome
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 800M
+    volumes:
+      - /mnt/external/appdata/esphome:/config
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+    privileged: true
+    restart: always
