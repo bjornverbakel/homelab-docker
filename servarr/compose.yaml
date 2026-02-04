@@ -9,7 +9,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /home/bjorn/external_drive/appdata/prowlarr:/config
+      - ${STORAGE_PATH}/appdata/prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -24,8 +24,8 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /home/bjorn/external_drive/appdata/radarr:/config
-      - /home/bjorn/external_drive/media:/data/media
+      - ${STORAGE_PATH}/appdata/radarr:/config
+      - ${STORAGE_PATH}/media:/data/media
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -40,8 +40,8 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /home/bjorn/external_drive/appdata/sonarr:/config
-      - /home/bjorn/external_drive/media:/data/media
+      - ${STORAGE_PATH}/appdata/sonarr:/config
+      - ${STORAGE_PATH}/media:/data/media
     ports:
       - 8989:8989
     restart: unless-stopped

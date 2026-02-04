@@ -7,8 +7,8 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /mnt/external/appdata/jellyfin:/config
-      - /mnt/external/media:/data/media
+      - ${STORAGE_PATH}/appdata/jellyfin:/config
+      - ${STORAGE_PATH}/media:/data/media
     ports:
       - 8096:8096
     restart: unless-stopped

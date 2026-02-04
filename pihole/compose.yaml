@@ -11,6 +11,6 @@ services:
     env_file:
       - ../.env
     volumes:
-      - '/mnt/external/appdata/pihole:/etc/pihole'
-      - '/mnt/external/appdata/dnsmasq.d:/etc/dnsmasq.d'
+      - '${STORAGE_PATH}/appdata/pihole:/etc/pihole'
+      - '${STORAGE_PATH}/appdata/dnsmasq.d:/etc/dnsmasq.d'
     restart: unless-stopped

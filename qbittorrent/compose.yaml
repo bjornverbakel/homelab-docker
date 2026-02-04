@@ -32,8 +32,8 @@ services:
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
     volumes:
-      - /home/bjorn/external_drive/appdata/qbittorrent:/config
-      - /home/bjorn/external_drive/media:/data/media
+      - ${STORAGE_PATH}/appdata/qbittorrent:/config
+      - ${STORAGE_PATH}/media:/data/media
     depends_on:
       - gluetun
     restart: unless-stopped

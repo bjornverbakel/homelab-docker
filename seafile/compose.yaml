@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - /mnt/external/appdata/seafile/data:/shared
+      - ${STORAGE_PATH}/appdata/seafile/data:/shared
     environment:
       - DB_HOST=db
       - DB_ROOT_PASSWD=${SEAFILE_DB_PASSWORD}
@@ -34,7 +34,7 @@ services:
     env_file:
       - ../.env
     volumes:
-      - /mnt/external/appdata/seafile/db:/var/lib/mysql
+      - ${STORAGE_PATH}/appdata/seafile/db:/var/lib/mysql
     restart: unless-stopped
 
   memcached:

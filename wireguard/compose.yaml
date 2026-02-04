@@ -1,0 +1,22 @@
+services:
+  wg-easy:
+    image: ghcr.io/wg-easy/wg-easy
+    container_name: wireguard
+    environment:
+      - WG_HOST=${PUBLIC_IP:-auto}
+      - PASSWORD_HASH=${WIREGUARD_PASSWORD_HASH} 
+      - WG_PORT=51820
+      - WG_DEFAULT_ADDRESS=10.8.0.x
+      - WG_DEFAULT_DNS=${HOST_IP}
+    volumes:
+      - ${STORAGE_PATH}/appdata/wireguard:/etc/wireguard
+    ports:
+      - "51820:51820/udp"
+      - "51821:51821/tcp"
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1

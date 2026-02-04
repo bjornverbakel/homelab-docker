@@ -8,6 +8,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/external/appdata/portainer:/data
+      - ${STORAGE_PATH}/appdata/portainer:/data
     ports:
       - 9443:9443

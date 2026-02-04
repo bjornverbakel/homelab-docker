@@ -1,7 +1,7 @@
 # Homelab Cheatsheet
 
 ## Docker Management
-*Run these commands from `/home/bjorn/docker`*
+*Run these commands from `/home/USER/docker`*
 
 ### List Running Containers
 ```bash
@@ -47,30 +47,23 @@ docker system prune -a
 git clone --recursive https://github.com/bjornverbakel/homelab-docker.git
 ```
 
-### Updating Infrastructure (Docker/Env)
-1. Go to the main folder:
-   ```bash
-   cd ~/docker
-   ```
-3. **Important:** If you updated the Homepage submodule, update the reference here too:
-   ```bash
-   git add homepage/homepage-config
-   ```
-4. Push to `homelab-docker` repo:
-   ```bash
-   git add .
-   git commit -m "Updated infrastructure"
-   git push
-   ```
+---
 
-### Updating Homepage Config (Dashboard)
-1. Go to the submodule folder:
-   ```bash
-   cd ~/docker/management/homepage
-   ```
-2. Push to `homepage-config` repo:
-   ```bash
-   git add .
-   git commit -m "Added new widgets"
-   git push
-   ```
+## Troubleshooting & Specifics
+
+### qBittorrent & VPN (ProtonVPN)
+**Leak Test**
+Verify that qBittorrent is using the VPN IP, not the Host IP.
+```bash
+# Check Host IP
+curl -s https://am.i.mullvad.net/ip
+
+# Check Container IP (Should be different)
+docker exec qbittorrent curl -s https://am.i.mullvad.net/ip
+```
+### WireGuard (Access Home Network Remotely)
+- **Web UI:** http://192.168.2.20:51821
+- **Password:** `secret` (Change in `.env` and recreate container)
+- **Configuration:** Update `PUBLIC_IP` in `/home/bjorn/docker/.env`
+- **Clients:** Scan QR code in Web UI to connect.
+- **Pi-hole Note:** If using Pi-hole for DNS, set "Permit all origins" in Pi-hole DNS settings if VPN clients can't browse.
