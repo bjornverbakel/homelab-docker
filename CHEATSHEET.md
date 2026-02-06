@@ -61,9 +61,3 @@ curl -s https://am.i.mullvad.net/ip
 # Check Container IP (Should be different)
 docker exec qbittorrent curl -s https://am.i.mullvad.net/ip
 ```
-### WireGuard (Access Home Network Remotely)
-- **Web UI:** http://192.168.2.20:51821
-- **Password:** `secret` (Change in `.env` and recreate container)
-- **Configuration:** Update `PUBLIC_IP` in `/home/bjorn/docker/.env`
-- **Clients:** Scan QR code in Web UI to connect.
-- **Pi-hole Note:** If using Pi-hole for DNS, set "Permit all origins" in Pi-hole DNS settings if VPN clients can't browse.

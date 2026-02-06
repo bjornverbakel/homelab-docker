@@ -2,6 +2,8 @@ services:
   gluetun: # Allows qBittorrent Web UI to run through a VPN
     image: qmcgaw/gluetun
     container_name: gluetun
+    labels:
+      - wud.watch=false
     cap_add:
       - NET_ADMIN
     devices:
@@ -43,11 +45,11 @@ services:
     container_name: qbittorrent-port-updater
     network_mode: service:gluetun
     environment:
-      - QBIT_USER=${QBITTORRENT_USERNAME}
-      - QBIT_PASS=${QBITTORRENT_PASSWORD}
+      - QBITTORRENT_USERNAME=${QBITTORRENT_USERNAME}
+      - QBITTORRENT_PASSWORD=${QBITTORRENT_PASSWORD}
     volumes:
       - ./port-updater.sh:/usr/local/bin/port-updater.sh
-    command: sh -c "apk add --no-cache curl && /usr/local/bin/port-updater.sh"
+    command: sh -c "apk add --no-cache curl jq && /usr/local/bin/port-updater.sh"
     depends_on:
       - gluetun
       - qbittorrent
