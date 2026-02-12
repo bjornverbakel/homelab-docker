@@ -34,12 +34,13 @@ This repository contains the declarative configuration for my home server infras
 | **Dashboard** | | |
 | `homepage` | `homepage/` | GetHomepage dashboard (Config via submodule). |
 | **Media** | | |
-| `servarr` | `servarr/` | Radarr, Sonarr, Prowlarr, & Flaresolverr. |
+| `servarr` | `servarr/` | Jellyseerr, Radarr, Sonarr, Prowlarr, & Flaresolverr. |
 | `qbittorrent` | `qbittorrent/` | Torrent client routed through Gluetun (ProtonVPN). |
 | `jellyfin` | `jellyfin/` | Media streaming server. |
 | **Storage** | | |
 | `seafile` | `seafile/` | Personal Cloud (Seafile, MariaDB, Memcached). |
 | **Home & Network** | | |
+| `tailscale` | `tailscale/` | Remote access VPN. |
 | `home-assistant` | `home-assistant/` | Home Automation. |
 | `pihole` | `pihole/` | Network-wide Ad Blocking & DNS. |
 | **Utilities** | | |

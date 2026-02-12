@@ -9,4 +9,4 @@ include:
   - servarr/compose.yaml
   - jellyfin/compose.yaml
   - whatsupdocker/compose.yaml
-  - wireguard/compose.yaml
+  - tailscale/compose.yaml

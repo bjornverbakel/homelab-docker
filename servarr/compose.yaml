@@ -45,3 +45,18 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    env_file:
+      - ../.env
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${STORAGE_PATH}/appdata/jellyseerr:/app/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped
