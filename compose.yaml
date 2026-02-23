@@ -10,3 +10,4 @@ include:
   - jellyfin/compose.yaml
   - whatsupdocker/compose.yaml
   - tailscale/compose.yaml
+  - subgen/compose.yaml

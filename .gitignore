@@ -5,3 +5,5 @@
 **/store/
 **/wireguard/config/
 cookies.txt
+compose.override.yaml
+subgen

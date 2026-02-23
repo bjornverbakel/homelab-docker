@@ -25,7 +25,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_PATH}/appdata/radarr:/config
-      - ${STORAGE_PATH}/media:/data/media
+      - ${STORAGE_PATH}/data:/data
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -41,7 +41,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_PATH}/appdata/sonarr:/config
-      - ${STORAGE_PATH}/media:/data/media
+      - ${STORAGE_PATH}/data:/data
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -59,4 +59,14 @@ services:
       - ${STORAGE_PATH}/appdata/jellyseerr:/app/config
     ports:
       - 5055:5055
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - TZ=
+    ports:
+      - 8191:8191
     restart: unless-stopped

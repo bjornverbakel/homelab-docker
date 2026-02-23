@@ -77,11 +77,11 @@ The `STORAGE_PATH` (set in `.env`) maps to `/mnt/storage` on the host. This keep
 │   ├── sonarr/
 │   └── ...
 │
-├── media/                # Jellyfin media library
-│   ├── movies/
-│   ├── shows/
-│   ├── torrents/         # Active download cache
-│   └── downloads/
-│
-├── configs/              # General usage configs
+├── data/                 # Media & Downloads
+│   ├── media/            # Organized Library
+│   │   ├── movies/
+│   │   ├── series/
+│   │   ├── anime/
+│   │
+│   └── torrents/         # Active download cache
 ```

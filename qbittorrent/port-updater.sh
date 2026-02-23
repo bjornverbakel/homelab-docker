@@ -13,7 +13,16 @@ current_port=0
 while true; do
     # 1. Get the forwarded port from Gluetun API
     # Note: Gluetun returns it as an integer in JSON
-    NEW_PORT=$(curl -s "$GLUETUN_ADDR/v1/portforward" | jq -r '.port')
+    RESPONSE=$(curl --connect-timeout 5 -s "$GLUETUN_ADDR/v1/portforward")
+    echo "Gluetun response: $RESPONSE"
+    
+    if [ -z "$RESPONSE" ]; then
+        echo "Empty response from Gluetun. Retrying in 10s..."
+        sleep 10
+        continue
+    fi
+    
+    NEW_PORT=$(echo "$RESPONSE" | jq -r '.port')
 
     if [ -z "$NEW_PORT" ] || [ "$NEW_PORT" = "null" ] || [ "$NEW_PORT" = "0" ]; then
         echo "Port not yet available from Gluetun. Retrying in 10s..."
